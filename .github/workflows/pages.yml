@@ -1,4 +1,4 @@
-name: Deploy LUMORA to GitHub Pages
+name: Deploy Personal Portfolio to GitHub Pages
 
 on:
   push:
@@ -33,7 +33,7 @@ jobs:
       - name: Upload LUMORA
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './Web-Development-Level-1-Landing-Page/LUMORA'
+          path: './WebDev-L1-PersonalPortfolio'
 
       - name: Deploy to GitHub Pages
         id: deployment
