@@ -1,4 +1,4 @@
-name: Deploy Personal Portfolio to GitHub Pages
+name: Deploy OIBSIP Projects to GitHub Pages
 
 on:
   push:
@@ -30,10 +30,34 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Upload LUMORA
+      - name: Prepare website
+        run: |
+          mkdir -p _site/lumora
+          mkdir -p _site/portfolio
+
+          cp -r Web-Development-Level-1-Landing-Page/LUMORA/* _site/lumora/
+          cp -r WebDev-L1-PersonalPortfolio/* _site/portfolio/
+
+          cat > _site/index.html <<'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>OIBSIP Projects</title>
+          </head>
+          <body>
+            <h1>OIBSIP Web Development & Designing Internship</h1>
+            <p><a href="./lumora/">Task 1 — LUMORA</a></p>
+            <p><a href="./portfolio/">Task 2 — Personal Portfolio</a></p>
+          </body>
+          </html>
+          EOF
+
+      - name: Upload OIBSIP Projects
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './WebDev-L1-PersonalPortfolio'
+          path: './_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
